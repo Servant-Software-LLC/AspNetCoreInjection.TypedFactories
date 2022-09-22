@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.Build.Traversal">
+  <ItemGroup>
+    <ProjectReference Include="AspNetCoreInjection.TypedFactories.Test\AspNetCoreInjection.TypedFactories.Test.csproj" />
+  </ItemGroup>
+</Project>

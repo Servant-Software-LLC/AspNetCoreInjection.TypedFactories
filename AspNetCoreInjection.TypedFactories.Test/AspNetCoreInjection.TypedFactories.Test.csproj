@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.2;net461</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <AssemblyName>AspNetCoreInjection.TypedFactories.Test</AssemblyName>
     <RootNamespace>AspNetCoreInjection.TypedFactories.Test</RootNamespace>
     <IsPackable>false</IsPackable>

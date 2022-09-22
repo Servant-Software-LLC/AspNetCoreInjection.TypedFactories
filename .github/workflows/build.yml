@@ -1,0 +1,59 @@
+name: build
+
+on: push
+
+env:
+  DOTNET_NOLOGO: 1
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+
+
+#    - name: Install .NET Core 5
+#      uses: actions/setup-dotnet@v1
+#      with:
+#        dotnet-version: 5.0.101
+
+
+#    - name: Install .NET Core 3.1
+#      uses: actions/setup-dotnet@v1
+#      with:
+#        dotnet-version: 3.1.405
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Restore dependencies
+      run: dotnet restore AspNetCoreInjection.TypedFactories.sln
+
+    - name: Build
+      run: msbuild AspNetCoreInjection.TypedFactories.sln /p:Configuration=Release
+
+    - name: Test
+      run: dotnet test tests.proj --no-build --configuration Release --verbosity minimal --settings test.runsettings --logger trx --results-directory ./TestResults #SWITCHES AVAILABLE ONLY WITH .NET 5.0:  --blame-hang-timeout 60s --blame-hang-dump-type mini
+
+    - name: Capture Test Results
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: TestResults
+        path: TestResults/
+
+#    - name: Upload build artifacts
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: Artifacts
+#        path: artifacts/*
+
+
+    - name: Push NuGet packages to GitHub Packages
+      if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+      run: dotnet nuget push "artifacts/**.nupkg" --skip-duplicate --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}
+
