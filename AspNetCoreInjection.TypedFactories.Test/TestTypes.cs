@@ -13,7 +13,7 @@
 
     public interface ITestService
     {
-        string FacotoryParam { get; }
+        string FactoryParam { get; }
         ITestDependency InjectedDepedency { get; }
     }
 
@@ -22,10 +22,10 @@
         public TestService(ITestDependency dep, string factoryParam1)
         {
             this.InjectedDepedency = dep;
-            this.FacotoryParam = factoryParam1;
+            this.FactoryParam = factoryParam1;
         }
 
-        public string FacotoryParam { get; private set; }
+        public string FactoryParam { get; private set; }
         public ITestDependency InjectedDepedency { get; private set; }
     }
 
@@ -36,10 +36,10 @@
         public TestServiceFlavor1(ITestDependency dep, string factoryParam1)
         {
             this.InjectedDepedency = dep;
-            this.FacotoryParam = factoryParam1;
+            this.FactoryParam = factoryParam1;
         }
 
-        public string FacotoryParam { get; private set; }
+        public string FactoryParam { get; private set; }
         public ITestDependency InjectedDepedency { get; private set; }
     }
 
@@ -50,10 +50,21 @@
         public TestServiceFlavor2(ITestDependency dep, string factoryParam1)
         {
             this.InjectedDepedency = dep;
-            this.FacotoryParam = factoryParam1;
+            this.FactoryParam = factoryParam1;
         }
 
-        public string FacotoryParam { get; private set; }
+        public string FactoryParam { get; private set; }
+        public ITestDependency InjectedDepedency { get; private set; }
+    }
+    public class TestServiceFlavor3WithoutCustomInterface : ITestService
+    {
+        public TestServiceFlavor3WithoutCustomInterface(ITestDependency dep, string factoryParam1)
+        {
+            this.InjectedDepedency = dep;
+            this.FactoryParam = factoryParam1;
+        }
+
+        public string FactoryParam { get; private set; }
         public ITestDependency InjectedDepedency { get; private set; }
     }
 
@@ -62,6 +73,7 @@
         ITestService Create(string factoryParam1);
         ITestServiceFlavor1 CreateFlavor1(string factoryParam1);
         ITestServiceFlavor2 CreateFlavor2(string factoryParam1);
+        TestServiceFlavor3WithoutCustomInterface CreateFlavor3(string factoryParam1);
     }
 
     public interface ITestServiceFactoryBadParamName

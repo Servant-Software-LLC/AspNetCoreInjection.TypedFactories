@@ -1,7 +1,6 @@
 ﻿using Xunit;
 using System;
 using Microsoft.Extensions.DependencyInjection;
-using System.Diagnostics;
 
 namespace AspNetCoreInjection.TypedFactories.Test
 {
@@ -18,7 +17,7 @@ namespace AspNetCoreInjection.TypedFactories.Test
             {
                 ITestService testSvc = svcProvider.GetRequiredService<ITestServiceFactory>().Create("ParamValue");
 
-                Assert.Equal("ParamValue", testSvc.FacotoryParam);
+                Assert.Equal("ParamValue", testSvc.FactoryParam);
                 Assert.NotNull(testSvc.InjectedDepedency);
             }
         }
@@ -32,18 +31,23 @@ namespace AspNetCoreInjection.TypedFactories.Test
                 .Flavor<ITestService, TestService>()
                 .Flavor<ITestServiceFlavor1, TestServiceFlavor1>()
                 .Flavor<ITestServiceFlavor2, TestServiceFlavor2>()
+                .Flavor<TestServiceFlavor3WithoutCustomInterface>()
                 .Register();
 
             using (var svcProvider = container.BuildServiceProvider())
             {
                 ITestService f1 = svcProvider.GetRequiredService<ITestServiceFactory>().CreateFlavor1("Flavor1");
                 ITestService f2 = svcProvider.GetRequiredService<ITestServiceFactory>().CreateFlavor2("Flavor2");
+                ITestService f3 = svcProvider.GetRequiredService<ITestServiceFactory>().CreateFlavor3("Flavor3");
 
                 Assert.IsAssignableFrom<ITestServiceFlavor1>(f1);
-                Assert.Equal("Flavor1", f1.FacotoryParam);
+                Assert.Equal("Flavor1", f1.FactoryParam);
 
                 Assert.IsAssignableFrom<ITestServiceFlavor2>(f2);
-                Assert.Equal("Flavor2", f2.FacotoryParam);
+                Assert.Equal("Flavor2", f2.FactoryParam);
+
+                Assert.IsAssignableFrom<TestServiceFlavor3WithoutCustomInterface>(f3);
+                Assert.Equal("Flavor3", f3.FactoryParam);
             }
         }
 

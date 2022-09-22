@@ -19,6 +19,12 @@ namespace AspNetCoreInjection.TypedFactories
             return this;
         }
 
+        public ITypedFactoryFlavor Flavor<TConcrete>()
+        {
+            this.flavorMap.Add(typeof(TConcrete), typeof(TConcrete));
+            return this;
+        }
+
         public void Register()
         {
             this.typedFactoryRegistration.ForConcreteTypes(flavorMap);

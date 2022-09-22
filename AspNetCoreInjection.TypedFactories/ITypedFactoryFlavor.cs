@@ -4,6 +4,8 @@
     {
         ITypedFactoryFlavor Flavor<TFrom, TTo>();
 
+        ITypedFactoryFlavor Flavor<TConcrete>();
+
         void Register();
     }
 }

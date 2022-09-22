@@ -50,14 +50,14 @@ namespace AspNetCoreInjection.TypedFactories
         /// <param name="to">The concrete type</param>
         public void AddConcreteTypeMapping(Type from, Type to)
         {
-            if (!from.IsInterface)
-            {
-                throw new Exception("From is expected to be an interface");
-            }
-
             if (!to.IsClass)
             {
                 throw new Exception("To is expected to be concrete class");
+            }
+
+            if (!from.IsInterface && from != to)
+            {
+                throw new Exception("From is expected to be an interface or equal to the concrete class To");
             }
 
             this.resolversMap.Add(from, new Resolver(to, Container));
