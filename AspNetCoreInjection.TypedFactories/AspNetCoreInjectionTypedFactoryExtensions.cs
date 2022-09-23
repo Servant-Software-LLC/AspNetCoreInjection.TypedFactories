@@ -54,5 +54,24 @@ namespace AspNetCoreInjection.TypedFactories
 
             return container;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TService">
+        /// The type of the service that is elsewhere registered to register a IFactory<TService> of.  Especially useful if the TService has been registered as a singleton
+        /// since the TypedFactory does not support this scenario.
+        /// </typeparam>
+        /// <param name="container">
+        /// The container.
+        /// </param>
+        /// <returns>
+        /// The container to continue its fluent interface.
+        /// </returns>
+        public static IServiceCollection RegisterFactoryForRegisteredService<TService>(this IServiceCollection container) where TService : class
+        {
+            container.AddSingleton<IFactory<TService>>(serviceProvider => new SimpleFactory<TService>(serviceProvider));
+            return container;
+        }
     }
 }

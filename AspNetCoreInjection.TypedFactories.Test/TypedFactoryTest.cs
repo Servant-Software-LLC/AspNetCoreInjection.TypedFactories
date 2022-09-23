@@ -111,6 +111,23 @@ namespace AspNetCoreInjection.TypedFactories.Test
         }
 
 
+        //NOTE:  This scenario fails and hence the need for the SimpleFactory class.
+        //
+        //[Fact]
+        //public void RespectsServiceLifetime_Singleton()
+        //{
+        //    IServiceCollection container = new ServiceCollection();
+        //    container.AddSingleton<SingletonTestService>();
+        //    container.RegisterTypedFactory<ISingletonTestServiceFactory>().ForConcreteType<SingletonTestService>();
 
+        //    using (var svcProvider = container.BuildServiceProvider())
+        //    {
+        //        SingletonTestService firstInstance = svcProvider.GetRequiredService<ISingletonTestServiceFactory>().Create();
+        //        SingletonTestService secondInstance = svcProvider.GetRequiredService<ISingletonTestServiceFactory>().Create();
+
+        //        Assert.Same(firstInstance, secondInstance);
+        //    }
+
+        //}
     }
 }

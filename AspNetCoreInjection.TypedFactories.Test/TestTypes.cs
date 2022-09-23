@@ -1,4 +1,6 @@
-﻿namespace AspNetCoreInjection.TypedFactories.Test
+﻿using System;
+
+namespace AspNetCoreInjection.TypedFactories.Test
 {
     public interface ITestDependency
     {
@@ -111,4 +113,12 @@
         ITestServiceInjectedOnly Create();
     }
 
+    public class SingletonTestService
+    {
+    }
+
+    public interface ISingletonTestServiceFactory
+    {
+        SingletonTestService Create();
+    }
 }
