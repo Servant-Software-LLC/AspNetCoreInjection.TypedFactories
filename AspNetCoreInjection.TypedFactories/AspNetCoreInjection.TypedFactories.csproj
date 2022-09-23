@@ -8,7 +8,8 @@
     <Authors>Alon Catz</Authors>
     <Company />
     <Description>Automatic Factory functionality similar to Castle.Windsor Typed Factories, for the default IoC container in ASP.NET Core (ServiceCollection)</Description>
-    <PackageProjectUrl>https://github.com/Servant-Software-LLC/AspNetCoreInjection.TypedFactories</PackageProjectUrl>
+	<PackageId>AspNetCoreInjection.TypedFactories.ServantSoftware</PackageId>
+	<PackageProjectUrl>https://github.com/Servant-Software-LLC/AspNetCoreInjection.TypedFactories</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Servant-Software-LLC/AspNetCoreInjection.TypedFactories</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Version>2.0.0</Version>
