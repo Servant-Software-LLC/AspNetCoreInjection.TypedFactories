@@ -23,5 +23,12 @@ namespace AspNetCoreInjection.TypedFactories
         /// <typeparam name="TFrom">Interface that the factory method returns</typeparam>
         /// <typeparam name="TTo">The concrete type which the factory will instantiate.</typeparam>
         ITypedFactoryFlavor Flavor<TFrom, TTo>();
+
+        /// <summary>
+        /// Registers implementations for factory methods without the need for creating an interface for the flavors.
+        /// </summary>
+        /// <typeparam name="TConcrete"></typeparam>
+        /// <returns></returns>
+        ITypedFactoryFlavor Flavor<TConcrete>();
     }
 }

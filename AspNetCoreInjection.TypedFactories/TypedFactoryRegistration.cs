@@ -85,6 +85,16 @@ namespace AspNetCoreInjection.TypedFactories
             return new TypedFactoryFlavor<TFactory>(this).Flavor<TFrom, TTo>();
         }
 
+        /// <summary>
+        /// Registers implementations for factory methods without the need for creating an interface for the flavors.
+        /// </summary>
+        /// <typeparam name="TConcrete"></typeparam>
+        /// <returns></returns>
+        public ITypedFactoryFlavor Flavor<TConcrete>()
+        {
+            return new TypedFactoryFlavor<TFactory>(this).Flavor<TConcrete>();
+        }
+
         private void VerifyFactoryMethods(FactoryInterceptor interceptor)
         {
             var factoryMethods = typeof(TFactory).GetMethods(BindingFlags.Public | BindingFlags.Instance);
