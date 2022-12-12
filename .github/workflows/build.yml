@@ -49,13 +49,13 @@ jobs:
         name: TestResults
         path: TestResults/
 
-#    - name: Upload build artifacts
-#      uses: actions/upload-artifact@v2
-#      with:
-#        name: Artifacts
-#        path: artifacts/*
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: NuGet Packages
+        path: AspNetCoreInjection.TypedFactories/bin/**.nupkg
 
 
-    - name: Push NuGet packages to GitHub Packages
-      run: dotnet nuget push "AspNetCoreInjection.TypedFactories/bin/**.nupkg" --skip-duplicate --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}
+#    - name: Push NuGet packages to GitHub Packages
+#      run: dotnet nuget push "AspNetCoreInjection.TypedFactories/bin/**.nupkg" --skip-duplicate --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}
 
