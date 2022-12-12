@@ -53,7 +53,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: NuGet Packages
-        path: AspNetCoreInjection.TypedFactories/bin/**.nupkg
+        path: AspNetCoreInjection.TypedFactories/bin/**/*.nupkg
 
 
 #    - name: Push NuGet packages to GitHub Packages
